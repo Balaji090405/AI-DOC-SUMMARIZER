@@ -9,7 +9,7 @@ from retrieval import process_and_store_chunks
 
 load_dotenv()
 
-client = MongoClient(os.getenv("MONGODB_URI"))
+client = MongoClient(os.getenv("MONGODB_URL"))
 db = client["ai_doc_summarizer"]
 fs = GridFS(db)
 projects_collection = db["projects"]

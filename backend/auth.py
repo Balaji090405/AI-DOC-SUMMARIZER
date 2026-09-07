@@ -17,7 +17,7 @@ SECRET_KEY = os.getenv("JWT_SECRET", "change_this_secret")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7
 
-client = MongoClient(os.getenv("MONGODB_URI"))
+client = MongoClient(os.getenv("MONGODB_URL"))
 db = client["ai_doc_summarizer"]
 users_collection = db["users"]
 

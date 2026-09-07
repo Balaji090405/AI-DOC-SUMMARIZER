@@ -15,7 +15,7 @@ from limiter import limiter
 
 load_dotenv()
 
-client = MongoClient(os.getenv("MONGODB_URI"))
+client = MongoClient(os.getenv("MONGODB_URL"))
 db = client["ai_doc_summarizer"]
 projects_collection = db["projects"]
 chat_history_collection = db["chat_history"]
