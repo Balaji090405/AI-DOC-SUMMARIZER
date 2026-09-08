@@ -1,4 +1,4 @@
-const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || "https://ai-doc-summarizer-qpp0.onrender.com").replace(/\/$/, "");
 
 export async function signup(email: string, password: string, name?: string) {
   const res = await fetch(`${API_URL}/auth/signup`, {
