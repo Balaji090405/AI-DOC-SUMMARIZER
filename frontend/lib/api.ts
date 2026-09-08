@@ -1,4 +1,20 @@
-const API_URL = (process.env.NEXT_PUBLIC_API_URL || "https://ai-doc-summarizer-qpp0.onrender.com").replace(/\/$/, "");
+export const API_URL = (process.env.NEXT_PUBLIC_API_URL || "https://ai-doc-summarizer-qpp0.onrender.com").replace(/\/$/, "");
+
+export function getFileDirectUrl(id: string, token: string): string {
+  return `${API_URL}/projects/${id}/file?token=${encodeURIComponent(token)}`;
+}
+
+export async function getFileBlobUrl(id: string, token: string): Promise<string> {
+  const url = getFileDirectUrl(id, token);
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to load document preview: ${res.status}`);
+  }
+  const blob = await res.blob();
+  return URL.createObjectURL(blob);
+}
 
 export async function signup(email: string, password: string, name?: string) {
   const res = await fetch(`${API_URL}/auth/signup`, {
