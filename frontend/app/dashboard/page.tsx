@@ -157,7 +157,7 @@ function ProjectCard({
 
   return (
     <a
-      href={"/project/" + project.id}
+      href={`/project/${project.id}`}
       className="group bg-white border border-slate-200/80 rounded-2xl p-5 hover:shadow-xl hover:shadow-indigo-500/5 hover:border-indigo-200/80 hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between animate-fade-in block"
     >
       <div>

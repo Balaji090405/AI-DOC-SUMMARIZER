@@ -316,9 +316,29 @@ export default function ProjectPage() {
     );
   }
 
-  const fileBaseUrl = `${process.env.NEXT_PUBLIC_API_URL}/projects/${id}/file?token=${getToken()}`;
-  const fileUrl = activePage ? `${fileBaseUrl}#page=${activePage}` : fileBaseUrl;
-  const isImage = project.content_type?.startsWith("image/");
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://ai-doc-summarizer-qpp0.onrender.com";
+
+const token = getToken();
+
+const fileResponse = await fetch(
+  `${API_URL}/projects/${id}/file`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+
+if (!fileResponse.ok) {
+  throw new Error(`Failed to load document: ${fileResponse.status}`);
+}
+
+const fileBlob = await fileResponse.blob();
+const fileUrl = URL.createObjectURL(fileBlob);
+const fileUrl = activePage ? `${fileBaseUrl}#page=${activePage}` : fileBaseUrl;
+const isImage = project.content_type?.startsWith("image/");
 
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-indigo-500 selection:text-white flex flex-col">
